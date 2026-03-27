@@ -157,21 +157,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 760),
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 22),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF6EFE8),
-                      borderRadius: BorderRadius.circular(38),
-                      border: Border.all(color: const Color(0xFFF6EFE8)),
+                      color: const Color(0xFF23211E),
+                      borderRadius: BorderRadius.circular(36),
+                      border: Border.all(
+                        color: const Color(0xFF3A3632),
+                        width: 1.2,
+                      ),
                       boxShadow: const [
                         BoxShadow(
-                          color: Color(0x16000000),
-                          blurRadius: 32,
-                          offset: Offset(0, 16),
-                        ),
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 8,
-                          offset: Offset(-2, -2),
+                          color: Color(0x30000000),
+                          blurRadius: 34,
+                          offset: Offset(0, 18),
                         ),
                       ],
                     ),
@@ -197,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Container(
                           height: 1,
-                          color: const Color(0xFFE6DDD3),
+                          color: const Color(0xFF312D29),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 26, 24, 0),
@@ -206,14 +204,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Text(
                                 t('subtitle'),
-                                textAlign: TextAlign.center,
                                 style: theme.textTheme.headlineMedium?.copyWith(
                                   fontSize: 28,
                                   height: 1.22,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
-                              const SizedBox(height: 22),
+                              const SizedBox(height: 10),
+                              Text(
+                                _language == AppLanguage.pt
+                                    ? 'Escaneie um item usado e receba a melhor ação sustentável.'
+                                    : 'Scan a used item and get the best sustainable action.',
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                  color: const Color(0xFFB7B0A8),
+                                  height: 1.55,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
                               ImagePickerSection(
                                 imageFile: _selectedImage,
                                 webImageBytes: _webImageBytes,
@@ -227,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onChooseImage: () => _pickImage(ImageSource.gallery),
                                 onTakePhoto: () => _pickImage(ImageSource.camera),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 18),
                               _AnalyzeButton(
                                 label: t('analyzeObject'),
                                 enabled: _pickedXFile != null && !_isLoading,
@@ -239,11 +246,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        width: 28,
-                                        height: 28,
+                                        width: 30,
+                                        height: 30,
                                         child: CircularProgressIndicator(
                                           strokeWidth: 3,
-                                          color: Color(0xFF5F5A55),
+                                          color: Color(0xFFB96557),
                                         ),
                                       ),
                                       SizedBox(height: 14),
@@ -251,7 +258,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         'Analyzing...',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
-                                          color: Color(0xFF615C57),
+                                          color: Color(0xFFD8D1C8),
+                                          fontSize: 15,
                                         ),
                                       ),
                                     ],
@@ -263,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     _errorMessage!,
                                     textAlign: TextAlign.center,
                                     style: theme.textTheme.bodyLarge?.copyWith(
-                                      color: const Color(0xFF9C5D63),
+                                      color: const Color(0xFFE58B8B),
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -304,11 +312,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           shrinkWrap: true,
                                           physics: const NeverScrollableScrollPhysics(),
                                           itemCount: ideas.length,
-                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: isNarrow ? 1 : 3,
                                             mainAxisSpacing: 12,
                                             crossAxisSpacing: 12,
-                                            childAspectRatio: isNarrow ? 2.4 : 0.92,
+                                            childAspectRatio: isNarrow ? 2.5 : 0.95,
                                           ),
                                           itemBuilder: (context, index) {
                                             return _IdeaCard(
@@ -327,8 +336,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Text(
                                     _translateText(_result!.reason),
                                     style: theme.textTheme.bodyLarge?.copyWith(
-                                      color: const Color(0xFF5F5A55),
-                                      height: 1.5,
+                                      color: const Color(0xFFD8D1C8),
+                                      height: 1.6,
                                     ),
                                   ),
                                 ),
@@ -338,8 +347,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child: Text(
                                       _translateText(_result!.recyclingTip),
                                       style: theme.textTheme.bodyLarge?.copyWith(
-                                        color: const Color(0xFF5F5A55),
-                                        height: 1.5,
+                                        color: const Color(0xFFD8D1C8),
+                                        height: 1.6,
                                       ),
                                     ),
                                   ),
@@ -382,13 +391,13 @@ class _BrandMark extends StatelessWidget {
           width: 54,
           height: 54,
           decoration: BoxDecoration(
-            color: const Color(0xFFA7AA93),
+            color: const Color(0xFF5F6F57),
             borderRadius: BorderRadius.circular(16),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x15000000),
-                blurRadius: 10,
-                offset: Offset(0, 4),
+                color: Color(0x22000000),
+                blurRadius: 12,
+                offset: Offset(0, 6),
               ),
             ],
           ),
@@ -409,11 +418,11 @@ class _BrandMark extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'Re',
-                style: TextStyle(color: Color(0xFF44413D)),
+                style: TextStyle(color: Color(0xFFF5F1EB)),
               ),
               TextSpan(
                 text: 'Use',
-                style: TextStyle(color: Color(0xFFD08D81)),
+                style: TextStyle(color: Color(0xFFB96557)),
               ),
             ],
           ),
@@ -441,7 +450,7 @@ class _AnalyzeButton extends StatelessWidget {
       child: IgnorePointer(
         ignoring: !enabled,
         child: Material(
-          color: const Color(0xFFD08D81),
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(999),
           child: InkWell(
             onTap: onTap,
@@ -452,16 +461,18 @@ class _AnalyzeButton extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(999),
                 gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFFD59589),
-                    Color(0xFFCB8175),
+                    Color(0xFFB96557),
+                    Color(0xFF8F473C),
                   ],
                 ),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x20000000),
-                    blurRadius: 16,
-                    offset: Offset(0, 8),
+                    color: Color(0x33000000),
+                    blurRadius: 18,
+                    offset: Offset(0, 10),
                   ),
                 ],
               ),
@@ -472,17 +483,31 @@ class _AnalyzeButton extends StatelessWidget {
                   Text(
                     label,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFFFFF8F3),
                       fontSize: 19,
                       fontWeight: FontWeight.w800,
                       letterSpacing: -0.4,
+                      shadows: [
+                        Shadow(
+                          color: Color(0x66000000),
+                          blurRadius: 6,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(width: 12),
                   const Icon(
                     Icons.search_rounded,
-                    color: Colors.white,
+                    color: Color(0xFFFFF8F3),
                     size: 28,
+                    shadows: [
+                      Shadow(
+                        color: Color(0x66000000),
+                        blurRadius: 6,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -508,14 +533,14 @@ class _IdeaCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 14, 14, 16),
       decoration: BoxDecoration(
-        color: const Color(0xFFFCFAF7),
+        color: const Color(0xFF2B2825),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFF0E8DF)),
+        border: Border.all(color: const Color(0xFF3A3632)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0D000000),
+            color: Color(0x18000000),
             blurRadius: 18,
-            offset: Offset(0, 7),
+            offset: Offset(0, 8),
           ),
         ],
       ),
@@ -526,13 +551,13 @@ class _IdeaCard extends StatelessWidget {
             width: 62,
             height: 62,
             decoration: BoxDecoration(
-              color: const Color(0xFFF3ECE6),
+              color: const Color(0xFF211F1C),
               borderRadius: BorderRadius.circular(18),
             ),
             child: Icon(
               icon,
               size: 32,
-              color: const Color(0xFFC89A7D),
+              color: const Color(0xFFB96557),
             ),
           ),
           const SizedBox(height: 12),
@@ -544,8 +569,8 @@ class _IdeaCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF4C4844),
-              height: 1.28,
+              color: Color(0xFFF1ECE5),
+              height: 1.3,
             ),
           ),
         ],
@@ -565,12 +590,12 @@ class _SoftStateCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F4EF),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: const Color(0xFFF0E8DF)),
+        color: const Color(0xFF2B2825),
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: const Color(0xFF3A3632)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x10000000),
+            color: Color(0x18000000),
             blurRadius: 20,
             offset: Offset(0, 8),
           ),
@@ -595,8 +620,8 @@ class _DecorativeBackground extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFF5F2ED),
-                  Color(0xFFF1EDE8),
+                  Color(0xFF181715),
+                  Color(0xFF11100F),
                 ],
               ),
             ),
@@ -607,7 +632,7 @@ class _DecorativeBackground extends StatelessWidget {
             child: _blurBlob(
               width: 180,
               height: 260,
-              color: const Color(0xFFF1E8DF),
+              color: const Color(0xFF262320),
             ),
           ),
           Positioned(
@@ -616,7 +641,7 @@ class _DecorativeBackground extends StatelessWidget {
             child: _blurBlob(
               width: 190,
               height: 280,
-              color: const Color(0xFFF3EDEA),
+              color: const Color(0xFF201D1A),
             ),
           ),
           Positioned(
@@ -651,12 +676,12 @@ class _DecorativeBackground extends StatelessWidget {
 
   Widget _leafGroup() {
     return Opacity(
-      opacity: 0.45,
+      opacity: 0.22,
       child: Column(
         children: const [
-          Icon(Icons.spa_outlined, color: Color(0xFFB8B6A7), size: 28),
+          Icon(Icons.spa_outlined, color: Color(0xFF5F6F57), size: 28),
           SizedBox(height: 12),
-          Icon(Icons.spa_outlined, color: Color(0xFFC9C2B8), size: 22),
+          Icon(Icons.spa_outlined, color: Color(0xFF7C866C), size: 22),
         ],
       ),
     );

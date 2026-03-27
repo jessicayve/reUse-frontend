@@ -7,23 +7,23 @@ class ReUseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const bg = Color(0xFFEFE9E2);
-    const surface = Color(0xFFF7F1EB);
-    const textPrimary = Color(0xFF34312E);
-    const textSecondary = Color(0xFF6E675F);
-    const pink = Color(0xFFD08A7D);
-    const sage = Color(0xFF9DA087);
-    const border = Color(0xFFE2D7CA);
+    const bg = Color(0xFF181715);
+    const surface = Color(0xFF23211E);
+    const textPrimary = Color(0xFFF5F1EB);
+    const textSecondary = Color(0xFFB7B0A8);
+    const pink = Color(0xFFB96557);
+    const sage = Color(0xFF5F6F57);
+    const border = Color(0xFF3A3632);
 
     final base = GoogleFonts.manropeTextTheme();
 
-    final scheme = const ColorScheme.light(
+    final scheme = const ColorScheme.dark(
       primary: pink,
       secondary: sage,
       surface: surface,
       onSurface: textPrimary,
       outline: border,
-      outlineVariant: Color(0xFFE9DED2),
+      outlineVariant: Color(0xFF312D29),
     );
 
     return MaterialApp(
@@ -61,13 +61,13 @@ class ReUseApp extends StatelessWidget {
           ),
           bodyLarge: GoogleFonts.manrope(
             fontSize: 14,
-            height: 1.42,
+            height: 1.5,
             fontWeight: FontWeight.w500,
             color: textPrimary,
           ),
           bodyMedium: GoogleFonts.manrope(
             fontSize: 13,
-            height: 1.4,
+            height: 1.45,
             fontWeight: FontWeight.w500,
             color: textPrimary,
           ),
@@ -87,13 +87,13 @@ class ReUseApp extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.selected)) {
-                return Colors.white;
+                return const Color(0xFF2F2B28);
               }
-              return const Color(0xFFF2EBE4);
+              return const Color(0xFF211F1C);
             }),
             foregroundColor: WidgetStateProperty.all(textPrimary),
             side: WidgetStateProperty.all(
-              const BorderSide(color: border, width: 1.15),
+              const BorderSide(color: border, width: 1.1),
             ),
             padding: WidgetStateProperty.all(
               const EdgeInsets.symmetric(horizontal: 14, vertical: 8),

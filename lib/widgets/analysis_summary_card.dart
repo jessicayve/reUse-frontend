@@ -35,33 +35,36 @@ class AnalysisSummaryCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F4EF),
+        color: const Color(0xFF2B2825),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: const Color(0xFFF0E8DF)),
+        border: Border.all(
+          color: const Color(0xFF3A3632),
+          width: 1.1,
+        ),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x12000000),
+            color: Color(0x18000000),
             blurRadius: 24,
             offset: Offset(0, 10),
-          ),
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 8,
-            offset: Offset(-2, -2),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: theme.textTheme.titleLarge),
+          Text(
+            title,
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: const Color(0xFFF5F1EB),
+            ),
+          ),
           const SizedBox(height: 14),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: const Color(0xFFFCFAF7),
+              color: const Color(0xFF23211E),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: const Color(0xFFF0E8DF)),
+              border: Border.all(color: const Color(0xFF3A3632)),
             ),
             child: Column(
               children: [
@@ -71,13 +74,13 @@ class AnalysisSummaryCard extends StatelessWidget {
                       width: 78,
                       height: 78,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3ECE6),
+                        color: const Color(0xFF211F1C),
                         borderRadius: BorderRadius.circular(18),
                       ),
                       child: Icon(
                         icon,
                         size: 42,
-                        color: const Color(0xFFD08D81),
+                        color: const Color(0xFFB96557),
                       ),
                     ),
                     const SizedBox(width: 14),
@@ -86,13 +89,14 @@ class AnalysisSummaryCard extends StatelessWidget {
                         objectName,
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontSize: 17,
+                          color: const Color(0xFFF5F1EB),
                         ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 14),
-                const Divider(height: 1, color: Color(0xFFEAE0D6)),
+                const Divider(height: 1, color: Color(0xFF3A3632)),
                 const SizedBox(height: 12),
                 _InfoLine(
                   label: conditionLabel,
@@ -107,7 +111,7 @@ class AnalysisSummaryCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 14),
-                const Divider(height: 1, color: Color(0xFFEAE0D6)),
+                const Divider(height: 1, color: Color(0xFF3A3632)),
                 const SizedBox(height: 12),
                 Row(
                   children: [
@@ -115,6 +119,7 @@ class AnalysisSummaryCard extends StatelessWidget {
                       confidenceLabel,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
+                        color: const Color(0xFFF5F1EB),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -125,7 +130,7 @@ class AnalysisSummaryCard extends StatelessWidget {
                     Text(
                       confidencePercentage,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: const Color(0xFF7A746D),
+                        color: const Color(0xFFB7B0A8),
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -161,7 +166,7 @@ class _InfoLine extends StatelessWidget {
           child: Text(
             label,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: const Color(0xFF7A746D),
+              color: const Color(0xFFB7B0A8),
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -171,7 +176,7 @@ class _InfoLine extends StatelessWidget {
             value!,
             style: theme.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF4B4743),
+              color: const Color(0xFFF5F1EB),
             ),
           ),
         if (trailing != null) trailing!,
@@ -194,7 +199,7 @@ class _DecisionCapsule extends StatelessWidget {
     return Container(
       height: 38,
       decoration: BoxDecoration(
-        color: const Color(0xFFD58D81),
+        color: const Color(0xFFB96557),
         borderRadius: BorderRadius.circular(999),
         boxShadow: const [
           BoxShadow(
@@ -222,7 +227,7 @@ class _DecisionCapsule extends StatelessWidget {
             height: 38,
             padding: const EdgeInsets.symmetric(horizontal: 14),
             decoration: const BoxDecoration(
-              color: Color(0xFFE5A79D),
+              color: Color(0xFF8E4A40),
               borderRadius: BorderRadius.horizontal(
                 right: Radius.circular(999),
               ),
@@ -255,7 +260,7 @@ class _ConfidenceBar extends StatelessWidget {
     return Container(
       height: 12,
       decoration: BoxDecoration(
-        color: const Color(0xFFE7E2DA),
+        color: const Color(0xFF211F1C),
         borderRadius: BorderRadius.circular(999),
       ),
       child: LayoutBuilder(
@@ -267,9 +272,9 @@ class _ConfidenceBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [
-                      Color(0xFFB0B293),
-                      Color(0xFFA3A58A),
-                      Color(0xFF8E9A8E),
+                      Color(0xFF5F6F57),
+                      Color(0xFF718169),
+                      Color(0xFF8A9A7F),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(999),

@@ -45,8 +45,8 @@ class ImagePickerSection extends StatelessWidget {
                     children: [
                       const Icon(
                         Icons.camera_alt_rounded,
-                        size: 36,
-                        color: Color(0xFFD48B80),
+                        size: 38,
+                        color: Color(0xFFB96557),
                       ),
                       const SizedBox(height: 14),
                       Text(
@@ -55,6 +55,7 @@ class ImagePickerSection extends StatelessWidget {
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
+                          color: const Color(0xFFF5F1EB),
                         ),
                       ),
                     ],
@@ -66,26 +67,35 @@ class ImagePickerSection extends StatelessWidget {
                         imageReadyText,
                         textAlign: TextAlign.center,
                         style: theme.textTheme.titleMedium?.copyWith(
-                          color: const Color(0xFF7A746D),
+                          color: const Color(0xFFB7B0A8),
                           fontSize: 14,
                         ),
                       ),
                       const SizedBox(height: 12),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: kIsWeb
-                            ? Image.memory(
-                                webImageBytes!,
-                                width: double.infinity,
-                                height: 170,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.file(
-                                imageFile!,
-                                width: double.infinity,
-                                height: 170,
-                                fit: BoxFit.cover,
-                              ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0xFF3A3632),
+                              width: 1.1,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: kIsWeb
+                              ? Image.memory(
+                                  webImageBytes!,
+                                  width: double.infinity,
+                                  height: 190,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(
+                                  imageFile!,
+                                  width: double.infinity,
+                                  height: 190,
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
                       ),
                     ],
                   ),
@@ -96,8 +106,8 @@ class ImagePickerSection extends StatelessWidget {
               Expanded(
                 child: _SoftPillButton(
                   label: chooseImageText,
-                  icon: Icons.photo_camera_rounded,
-                  backgroundColor: const Color(0xFFA6A991),
+                  icon: Icons.photo_library_rounded,
+                  backgroundColor: const Color(0xFF5F6F57),
                   foregroundColor: Colors.white,
                   onTap: onChooseImage,
                 ),
@@ -107,9 +117,9 @@ class ImagePickerSection extends StatelessWidget {
                 child: _SoftPillButton(
                   label: takePhotoText,
                   icon: Icons.camera_alt_rounded,
-                  backgroundColor: const Color(0xFFF8F4EF),
-                  foregroundColor: const Color(0xFF7A746D),
-                  borderColor: const Color(0xFFD9CEC2),
+                  backgroundColor: const Color(0xFF211F1C),
+                  foregroundColor: const Color(0xFFF5F1EB),
+                  borderColor: const Color(0xFF3A3632),
                   onTap: onTakePhoto,
                 ),
               ),
@@ -136,19 +146,17 @@ class _SoftOuterCard extends StatelessWidget {
       width: double.infinity,
       padding: padding,
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F4EF),
+        color: const Color(0xFF2B2825),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: const Color(0xFFF0E8DF)),
+        border: Border.all(
+          color: const Color(0xFF3A3632),
+          width: 1.1,
+        ),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0D000000),
+            color: Color(0x18000000),
             blurRadius: 24,
             offset: Offset(0, 10),
-          ),
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 8,
-            offset: Offset(-2, -2),
           ),
         ],
       ),
@@ -168,10 +176,10 @@ class _DashedArea extends StatelessWidget {
       painter: _DashedPainter(),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          color: const Color(0xFFF8F4EF),
+          color: const Color(0xFF23211E),
         ),
         child: child,
       ),
@@ -189,7 +197,7 @@ class _DashedPainter extends CustomPainter {
     );
 
     final paint = Paint()
-      ..color = const Color(0xFFD9CEC2)
+      ..color = const Color(0xFF4A443E)
       ..strokeWidth = 1.2
       ..style = PaintingStyle.stroke;
 
@@ -238,7 +246,7 @@ class _SoftPillButton extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(999),
         child: Container(
-          height: 50,
+          height: 52,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(999),
             border: borderColor != null
@@ -246,9 +254,9 @@ class _SoftPillButton extends StatelessWidget {
                 : null,
             boxShadow: const [
               BoxShadow(
-                color: Color(0x12000000),
-                blurRadius: 10,
-                offset: Offset(0, 4),
+                color: Color(0x16000000),
+                blurRadius: 12,
+                offset: Offset(0, 5),
               ),
             ],
           ),
