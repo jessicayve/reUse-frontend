@@ -124,6 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  List<String> _translateIdeas(List<String> ideas) {
+    return BackendTranslator.translateList(
+      items: ideas,
+      language: _language,
+    );
+  }
+
   IconData _iconForObject(String objectName) {
     final normalized = objectName.toLowerCase();
     if (normalized.contains('shirt') || normalized.contains('camis')) {
@@ -145,6 +152,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final t = (String key) => AppStrings.t(_language, key);
+
+    final translatedIdeas = _result != null
+        ? _translateIdeas(_result!.reuseIdeas)
+        : <String>[];
 
     return Scaffold(
       body: Stack(
@@ -212,9 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                _language == AppLanguage.pt
-                                    ? 'Escaneie um item usado e receba a melhor ação sustentável.'
-                                    : 'Scan a used item and get the best sustainable action.',
+                                t('scanDescription'),
                                 style: theme.textTheme.bodyLarge?.copyWith(
                                   color: const Color(0xFFB7B0A8),
                                   height: 1.55,
@@ -226,9 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 webImageBytes: _webImageBytes,
                                 chooseImageText: t('chooseImage'),
                                 takePhotoText: t('takePhoto'),
-                                noImageText: _language == AppLanguage.pt
-                                    ? 'Envie ou tire uma foto de um item usado.'
-                                    : 'Upload or take a photo of a used item.',
+                                noImageText: t('uploadHint'),
                                 selectedImageText: t('selectedImage'),
                                 imageReadyText: t('imageReady'),
                                 onChooseImage: () => _pickImage(ImageSource.gallery),
@@ -242,10 +249,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(height: 24),
                               if (_isLoading)
-                                const _SoftStateCard(
+                                _SoftStateCard(
                                   child: Column(
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 30,
                                         height: 30,
                                         child: CircularProgressIndicator(
@@ -253,10 +260,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: Color(0xFFB96557),
                                         ),
                                       ),
-                                      SizedBox(height: 14),
+                                      const SizedBox(height: 14),
                                       Text(
-                                        'Analyzing...',
-                                        style: TextStyle(
+                                        t('analyzing'),
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                           color: Color(0xFFD8D1C8),
                                           fontSize: 15,
@@ -286,13 +293,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   conditionValue: ScanFormatters.capitalize(
                                     _translateCondition(_result!.condition),
                                   ),
-                                  decisionLabel: _language == AppLanguage.pt
-                                      ? 'Decisão'
-                                      : 'Decision',
+                                  decisionLabel: t('decision'),
                                   decisionValue: _translateDecision(_result!.decision),
-                                  confidenceLabel: _language == AppLanguage.pt
-                                      ? 'Confiança'
-                                      : 'Confidence',
+                                  confidenceLabel: t('confidence'),
                                   confidence: _result!.confidence,
                                   confidencePercentage:
                                       ScanFormatters.formatConfidencePercentage(
@@ -300,13 +303,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   icon: _iconForObject(_result!.objectName),
                                 ),
-                                if (_result!.reuseIdeas.isNotEmpty)
+                                if (translatedIdeas.isNotEmpty)
                                   ResultCard(
                                     title: t('reuseIdeas'),
                                     child: LayoutBuilder(
                                       builder: (context, constraints) {
                                         final isNarrow = constraints.maxWidth < 520;
-                                        final ideas = _result!.reuseIdeas.take(3).toList();
+                                        final ideas = translatedIdeas.take(3).toList();
 
                                         return GridView.builder(
                                           shrinkWrap: true,
@@ -321,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           itemBuilder: (context, index) {
                                             return _IdeaCard(
-                                              text: _translateText(ideas[index]),
+                                              text: ideas[index],
                                               icon: _ideaIcon(index),
                                             );
                                           },
@@ -330,9 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ResultCard(
-                                  title: _language == AppLanguage.pt
-                                      ? 'Explicação'
-                                      : 'Explanation',
+                                  title: t('explanation'),
                                   child: Text(
                                     _translateText(_result!.reason),
                                     style: theme.textTheme.bodyLarge?.copyWith(

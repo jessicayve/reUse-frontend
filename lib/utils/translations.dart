@@ -41,6 +41,12 @@ class AppStrings {
       'decisionRecycle': 'Recycle',
       'decisionDonate': 'Donate',
       'decisionDispose': 'Dispose',
+      'decision': 'Decision',
+      'confidence': 'Confidence',
+      'analyzing': 'Analyzing...',
+      'scanDescription':
+          'Scan a used item and get the best sustainable action.',
+      'uploadHint': 'Upload or take a photo of a used item.',
     },
     AppLanguage.pt: {
       'appTitle': 'ReUse',
@@ -66,7 +72,8 @@ class AppStrings {
       'medium': 'Média',
       'low': 'Baixa',
       'emptyStateTitle': 'Comece sua análise',
-      'emptyStateSubtitle': 'Escolha uma imagem ou tire uma foto para analisar um objeto usado.',
+      'emptyStateSubtitle':
+          'Escolha uma imagem ou tire uma foto para analisar um objeto usado.',
       'loadingText': 'Analisando imagem...',
       'scanSummary': 'Resumo da análise',
       'analysisOverview': 'Visão geral da análise',
@@ -81,6 +88,12 @@ class AppStrings {
       'decisionRecycle': 'Reciclar',
       'decisionDonate': 'Doar',
       'decisionDispose': 'Descartar',
+      'decision': 'Decisão',
+      'confidence': 'Confiança',
+      'analyzing': 'Analisando...',
+      'scanDescription':
+          'Escaneie um item usado e receba a melhor ação sustentável.',
+      'uploadHint': 'Envie ou tire uma foto de um item usado.',
     },
   };
 
@@ -119,12 +132,32 @@ class BackendTranslator {
   };
 
   static final Map<String, String> fullTextPt = {
-    'Due to its damaged condition, this shirt is better suited for repurposing than regular use.':
+    'due to its damaged condition, this shirt is better suited for repurposing than regular use':
         'Devido ao seu estado danificado, esta peça é mais adequada para reaproveitamento do que para uso normal.',
-    'use it as a cleaning rag': 'use como pano de limpeza',
-    'turn it into a reusable bag': 'transforme em uma bolsa reutilizável',
-    'upcycle it into a unique item': 'faça um reaproveitamento criativo em um novo item',
+    'use it as a cleaning rag': 'Use como pano de limpeza',
+    'turn it into a reusable bag': 'Transforme em uma bolsa reutilizável',
+    'upcycle it into a unique item':
+        'Faça um reaproveitamento criativo em um novo item',
+    'the fabric is torn but can be mended for extended use':
+        'O tecido está rasgado, mas pode ser consertado para continuar sendo usado.',
+    'patch the holes with decorative fabric':
+        'Cubra os furos com tecido decorativo',
+    'cut into cleaning rags': 'Corte em panos de limpeza',
+    'use for craft projects': 'Use em projetos de artesanato',
+    'turn into plant pot holders': 'Transforme em suporte para vasos de plantas',
+    'too damaged to wear but can be repurposed':
+        'Está danificado demais para vestir, mas pode ser reaproveitado.',
+    "don't throw it in regular trash, check the recycling bin, collection point or local rules to recycle it properly":
+        'Não jogue no lixo comum; verifique a coleta seletiva, um ponto de descarte ou as regras locais para reciclar corretamente.',
   };
+
+  static String _normalize(String text) {
+    return text
+        .trim()
+        .toLowerCase()
+        .replaceAll(RegExp(r'[.!?]+$'), '')
+        .replaceAll(RegExp(r'\s+'), ' ');
+  }
 
   static String translateValue({
     required String value,
@@ -134,14 +167,72 @@ class BackendTranslator {
     if (language == AppLanguage.en) return value;
     if (value.trim().isEmpty) return value;
 
-    if (customMap != null && customMap.containsKey(value)) {
-      return customMap[value]!;
+    final normalizedValue = _normalize(value);
+
+    if (customMap != null) {
+      for (final entry in customMap.entries) {
+        if (_normalize(entry.key) == normalizedValue) {
+          return entry.value;
+        }
+      }
     }
 
-    if (fullTextPt.containsKey(value)) {
-      return fullTextPt[value]!;
+    for (final entry in fullTextPt.entries) {
+      if (_normalize(entry.key) == normalizedValue) {
+        return entry.value;
+      }
+    }
+
+    if (normalizedValue.contains('damaged') &&
+        normalizedValue.contains('repurpos')) {
+      return 'Devido ao estado danificado, este item é mais adequado para reaproveitamento.';
+    }
+
+    if (normalizedValue.contains('damaged') &&
+        normalizedValue.contains('wear')) {
+      return 'Está danificado demais para uso normal, mas ainda pode ser reaproveitado.';
+    }
+
+    if (normalizedValue.contains('fabric') &&
+        normalizedValue.contains('torn')) {
+      return 'O tecido está rasgado, mas pode ser consertado para continuar em uso.';
+    }
+
+    if (normalizedValue.contains('cleaning rag') ||
+        normalizedValue.contains('cleaning rags')) {
+      return 'Use como pano de limpeza';
+    }
+
+    if (normalizedValue.contains('reusable bag')) {
+      return 'Transforme em uma bolsa reutilizável';
+    }
+
+    if (normalizedValue.contains('upcycle')) {
+      return 'Reaproveite de forma criativa em um novo item';
+    }
+
+    if (normalizedValue.contains('craft project')) {
+      return 'Use em projetos de artesanato';
+    }
+
+    if (normalizedValue.contains('plant pot holders')) {
+      return 'Transforme em suporte para vasos de plantas';
+    }
+
+    if (normalizedValue.contains('recycling bin') ||
+        normalizedValue.contains('collection point')) {
+      return 'Não jogue no lixo comum; procure a coleta seletiva ou um ponto de descarte adequado.';
     }
 
     return value;
+  }
+
+  static List<String> translateList({
+    required List<String> items,
+    required AppLanguage language,
+  }) {
+    return items
+        .map((item) => translateValue(value: item, language: language))
+        .toList();
   }
 }
