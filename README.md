@@ -1,17 +1,63 @@
-# reuse_app
+# ♻️ ReUse – Eco-Friendly Image Analysis App
 
-A new Flutter project.
+ReUse is a mobile app built with Flutter that helps users make sustainable decisions about used items using AI-powered image analysis.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🌱 About the Project
 
-A few resources to get you started if this is your first Flutter project:
+ReUse allows users to:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- 📸 Take a photo or select an image
+- 🤖 Analyze the item using an AI backend
+- ♻️ Receive a recommended sustainable action
+- 💡 Get reuse ideas and recycling tips
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The goal is to reduce waste and encourage more conscious consumption.
+
+---
+
+## 🚀 Features
+
+- Image selection (gallery & camera)
+- AI-based analysis (Python backend)
+- Sustainable recommendations
+- Reuse ideas and recycling tips
+- Confidence level indicator
+- English 🇺🇸 / Portuguese 🇧🇷 support
+- Clean and modern UI (Flutter)
+
+---
+
+## 🧠 Tech Stack
+
+### Frontend
+- Flutter
+- Dart
+- image_picker
+- http
+
+### Backend
+- Python
+- FastAPI
+- OpenAI API
+
+---
+
+## 🔗 Backend Repository / API
+
+👉 **Backend URL:**  
+`https://github.com/jessicayve/reUse-backend`
+
+Deploy:
+[https://reuse-backend.onrender.com](https://re-use-frontend-sable.vercel.app/)
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/reuse_app.git
+cd reuse_app
+flutter pub get
+flutter run
